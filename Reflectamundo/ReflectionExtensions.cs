@@ -8,7 +8,7 @@ namespace Reflectamundo
     /// <summary>
     /// A set of convenience methods for performing common reflection operations
     /// </summary>
-    public static class AssemblyExtensions
+    public static class ReflectionExtensions
     {
         /// <summary>
         /// Gets all types of type T

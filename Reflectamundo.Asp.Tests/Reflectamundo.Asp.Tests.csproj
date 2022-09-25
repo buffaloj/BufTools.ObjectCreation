@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Reflectamundo.Asp\Reflectamundo.Asp.csproj" />
     <ProjectReference Include="..\Reflectamundo.TestWebApi\Reflectamundo.TestWebApi.csproj" />
     <ProjectReference Include="..\Reflectamundo\Reflectamundo.csproj" />
   </ItemGroup>
