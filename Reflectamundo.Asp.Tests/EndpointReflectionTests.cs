@@ -17,9 +17,9 @@ namespace Reflectamundo.Asp.Tests
         [TestMethod]
         public void GetEndpoints_WithValidAssembly_GetsEndpoints()
         {
-            var docs = _assembly.GetEndpoints();
+            var endpoints = _assembly.GetEndpoints();
 
-            Assert.IsNotNull(docs);
+            Assert.IsNotNull(endpoints);
         }
     }
 }
