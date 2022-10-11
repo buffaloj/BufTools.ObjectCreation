@@ -71,6 +71,13 @@ namespace Reflectamundo
             return documentation;
         }
 
+        public static MemberDoc GetDocumentation(this IDictionary<string, MemberDoc> xmlDocumentation, PropertyInfo propertyInfo)
+        {
+            var key = "P:" + XmlDocumentationKeyHelper(propertyInfo.DeclaringType.FullName, propertyInfo.Name);
+            xmlDocumentation.TryGetValue(key, out MemberDoc documentation);
+            return documentation;
+        }
+
         public static MemberDoc GetDocumentation(this Dictionary<string, MemberDoc> xmlDocumentation, MethodInfo methodInfo)
         {
             string key;

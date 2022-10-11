@@ -41,6 +41,13 @@ namespace Reflectamundo
                            .ToArray();
         }
 
+        public static Type[] GetClasses(this Assembly assembly)
+        {
+            return assembly.GetTypes().Where(t => !t.IsInterface &&
+                                                  !t.IsAbstract)
+                           .ToArray();
+        }
+
         /// <summary>
         /// Gets the path to the location of the assembly on disk
         /// </summary>
