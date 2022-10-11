@@ -34,6 +34,5 @@ namespace Reflectamundo.Tests
 
             Assert.IsNotNull(model);
         }
-
     }
 }
