@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Reflectamundo.Extensions;
 using Reflectamundo.Tests.Models;
 
 namespace Reflectamundo.Tests

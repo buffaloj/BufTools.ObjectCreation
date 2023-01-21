@@ -2,6 +2,7 @@
 using System.Reflection;
 using Reflectamundo.TestWebApi.Controllers;
 using Reflectamundo.TestWebApi.Requests;
+using Reflectamundo.Extensions;
 
 namespace Reflectamundo.Tests
 {

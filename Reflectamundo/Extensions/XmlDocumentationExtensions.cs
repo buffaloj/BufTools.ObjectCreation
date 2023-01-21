@@ -1,5 +1,5 @@
-﻿using Reflectamundo.Models;
-using Reflectamundo.Resources;
+﻿using BufTools.ObjectCreation.Resources;
+using Reflectamundo.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Xml;
 
-namespace Reflectamundo
+namespace Reflectamundo.Extensions
 {
     public static class XmlDocumentationExtensions
     {

@@ -24,7 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Reflectamundo.TestWebApi\Reflectamundo.TestWebApi.csproj" />
-    <ProjectReference Include="..\Reflectamundo\Reflectamundo.csproj" />
+    <ProjectReference Include="..\Reflectamundo\BufTools.ObjectCreation.csproj" />
   </ItemGroup>
 
 </Project>

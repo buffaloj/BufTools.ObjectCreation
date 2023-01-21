@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace Reflectamundo
+namespace Reflectamundo.Extensions
 {
     /// <summary>
     /// A set of convenience methods for performing common reflection operations
@@ -35,8 +35,8 @@ namespace Reflectamundo
         public static Type[] GetClasses<T>(this Assembly assembly)
             where T : class
         {
-            return assembly.GetTypes().Where(t => typeof(T).IsAssignableFrom(t) && 
-                                                  !t.IsInterface && 
+            return assembly.GetTypes().Where(t => typeof(T).IsAssignableFrom(t) &&
+                                                  !t.IsInterface &&
                                                   !t.IsAbstract)
                            .ToArray();
         }
