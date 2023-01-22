@@ -1,5 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Reflectamundo.Extensions;
+﻿using BufTools.ObjectCreation.FromXmlComments.Extensions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Reflectamundo.Tests.Models;
 
 namespace Reflectamundo.Tests

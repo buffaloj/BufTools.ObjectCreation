@@ -1,5 +1,5 @@
-﻿using Reflectamundo.Exceptions;
-using Reflectamundo.Extensions;
+﻿using BufTools.ObjectCreation.FromXmlComments.Extensions;
+using Reflectamundo.Exceptions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,6 +13,11 @@ namespace Reflectamundo
         public ObjectMother(IServiceProvider provider)
         {
             _provider = provider ?? throw new ArgumentNullException(nameof(provider));
+        }
+
+        public T Birth<T>()
+        {
+            return (T)Birth(typeof(T));
         }
 
         public object Birth(Type type)

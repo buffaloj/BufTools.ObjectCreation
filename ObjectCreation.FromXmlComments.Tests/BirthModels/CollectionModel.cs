@@ -5,6 +5,6 @@
         /// <summary>
         /// A collection of objects
         /// </summary>
-        public IEnumerable<BasicPropertiesModel>? Collection { get; set; }
+        public IEnumerable<BasicPropertiesModel> Collection { get; set; }
     }
 }

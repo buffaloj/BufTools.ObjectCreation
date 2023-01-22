@@ -1,4 +1,4 @@
-﻿using BufTools.ObjectCreation.Resources;
+﻿using BufTools.ObjectMother.FromXmlComments.Resources;
 using Reflectamundo.Models;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Xml;
 
-namespace Reflectamundo.Extensions
+namespace BufTools.ObjectCreation.FromXmlComments.Extensions
 {
     public static class XmlDocumentationExtensions
     {

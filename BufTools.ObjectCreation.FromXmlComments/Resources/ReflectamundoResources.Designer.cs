@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BufTools.ObjectCreation.Resources {
+namespace BufTools.ObjectMother.FromXmlComments.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace BufTools.ObjectCreation.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BufTools.ObjectCreation.Resources.ReflectamundoResources", typeof(ReflectamundoResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BufTools.ObjectMother.FromXmlComments.Resources.ReflectamundoResources", typeof(ReflectamundoResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

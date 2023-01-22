@@ -1,8 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Reflection;
-using Reflectamundo.TestWebApi.Controllers;
-using Reflectamundo.TestWebApi.Requests;
-using Reflectamundo.Extensions;
+using ObjectCreation.FromXmlComments.Tests.ReflectionModels;
+using BufTools.ObjectCreation.FromXmlComments.Extensions;
 
 namespace Reflectamundo.Tests
 {
@@ -13,7 +12,7 @@ namespace Reflectamundo.Tests
 
         public XmlDocumentationTests()
         {
-            _assembly = typeof(ExampleController).Assembly;
+            _assembly = typeof(XmlCommentModel).Assembly;
         }
 
         [TestMethod]
@@ -28,7 +27,7 @@ namespace Reflectamundo.Tests
         public void GetDocumentation_WithValidType_GetsDocumentation()
         {
             var docs = _assembly.LoadXmlDocumentation();
-            var objectComments = docs.GetDocumentation(typeof(ExampleRequest));
+            var objectComments = docs.GetDocumentation(typeof(XmlCommentModel));
 
             Assert.IsNotNull(objectComments);
         }
@@ -37,7 +36,7 @@ namespace Reflectamundo.Tests
         public void GetDocumentation_WithValidMethod_GetsDocumentation()
         {
             var docs = _assembly.LoadXmlDocumentation();
-            var objectComments = docs.GetDocumentation(typeof(ExampleController));
+            var objectComments = docs.GetDocumentation(typeof(XmlCommentModel));
 
             Assert.IsNotNull(objectComments);
         }

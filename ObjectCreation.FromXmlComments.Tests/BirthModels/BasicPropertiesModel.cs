@@ -6,7 +6,7 @@
         /// An example of a string property
         /// </summary>
         /// <example>A String!</example>
-        public string? StringProperty { get; set; }
+        public string StringProperty { get; set; }
 
         /// <summary>
         /// An example of a int property
