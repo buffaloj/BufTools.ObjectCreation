@@ -1,5 +1,5 @@
 # Object Mother
-The ObjectMother class will create an instance of an object and initialize the properties from the example value provided by the XML comments on the property.
+The ObjectMother class will create an instance of an object and initialize it from the example values in your XML comments.
 
 example:
 ```cs

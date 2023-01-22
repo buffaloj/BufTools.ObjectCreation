@@ -6,10 +6,10 @@
     <DocumentationFile />
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>Object Mother</Title>
-    <Description>Includes an ObjectMother that can create an object and initialize it from example values provided by XML comments on the properties.</Description>
+    <Description>Provides an ObjectMother class that will create an instance of an object and initialize it from the example values in your XML comments.</Description>
     <Copyright>Copyright (c) Jeremy Shull, 2023</Copyright>
-    <PackageProjectUrl>https://github.com/buffaloj/Reflectamundo</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/buffaloj/Reflectamundo</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/buffaloj/BufTools.ObjectCreation</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/buffaloj/BufTools.ObjectCreation</RepositoryUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>test;testing;factory;reflection</PackageTags>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
