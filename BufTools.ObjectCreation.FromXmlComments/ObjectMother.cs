@@ -53,7 +53,7 @@ namespace Reflectamundo
             return instance;
         }
 
-        private object? GetValue(string? value, Type type)
+        private object GetValue(string value, Type type)
         {
             if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IEnumerable<>))
             {

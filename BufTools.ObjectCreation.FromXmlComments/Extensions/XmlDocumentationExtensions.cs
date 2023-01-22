@@ -1,4 +1,4 @@
-﻿using BufTools.ObjectMother.FromXmlComments.Resources;
+﻿using BufTools.ObjectCreation.FromXmlComments.Resources;
 using Reflectamundo.Models;
 using System;
 using System.Collections.Generic;
@@ -18,7 +18,7 @@ namespace BufTools.ObjectCreation.FromXmlComments.Extensions
             string xmlFilePath = Path.Combine(xmlDirectoryPath, assembly.GetName().Name + ".xml");
 
             if (!File.Exists(xmlFilePath))
-                throw new FileNotFoundException(string.Format(ReflectamundoResources.XmlFileNotFound, xmlFilePath));
+                throw new FileNotFoundException(string.Format(ProjectResources.XmlFileNotFound, xmlFilePath));
 
             return LoadXmlDocumentation(File.ReadAllText(xmlFilePath));
         }
