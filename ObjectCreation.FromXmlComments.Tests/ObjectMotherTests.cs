@@ -11,23 +11,18 @@ namespace Reflectamundo.Tests
 
         public ObjectMotherTests()
         {
-            var provider = BuildServiceProvider();
-
-            _target = new ObjectMother(provider);
-        }
-
-        private static IServiceProvider BuildServiceProvider()
-        {
             var sc = new ServiceCollection();
             sc.AddSingleton<BasicPropertiesModel>();
             sc.AddSingleton<CollectionModel>();
-            return sc.BuildServiceProvider();
+            var provider = sc.BuildServiceProvider();
+
+            _target = new ObjectMother(provider);
         }
 
         [TestMethod]
         public void Birth_WithBasicPropertiesModel_CreatesObject()
         {
-            var model = _target.Birth(typeof(BasicPropertiesModel));
+            var model = _target.Birth<BasicPropertiesModel>();
 
             Assert.IsNotNull(model);
         }
