@@ -14,6 +14,7 @@ public class ExampleModel
 
 var instance = objectMother.Birth<ExampleModel>();
 ```
+* Results in (instance == "A String!")
 
 # Getting Started
 
