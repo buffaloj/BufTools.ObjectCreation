@@ -14,7 +14,7 @@ public class ExampleModel
 
 var instance = objectMother.Birth<ExampleModel>();
 ```
-* Results in (instance == "A String!")
+* Results in truth (instance.StringProperty == "A String!")
 
 # Getting Started
 
