@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace Reflectamundo.Models
+namespace BufTools.ObjectCreation.FromXmlComments.Models
 {
     public class MemberDoc
     {

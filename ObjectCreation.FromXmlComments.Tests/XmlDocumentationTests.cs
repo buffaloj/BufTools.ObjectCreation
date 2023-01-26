@@ -3,7 +3,7 @@ using System.Reflection;
 using ObjectCreation.FromXmlComments.Tests.ReflectionModels;
 using BufTools.ObjectCreation.FromXmlComments.Extensions;
 
-namespace Reflectamundo.Tests
+namespace ObjectCreation.FromXmlComments.Tests
 {
     [TestClass]
     public class XmlDocumentationTests

@@ -1,51 +1,86 @@
-﻿using BufTools.ObjectCreation.FromXmlComments.Extensions;
-using Reflectamundo.Exceptions;
+﻿using BufTools.ObjectCreation.FromXmlComments.Exceptions;
+using BufTools.ObjectCreation.FromXmlComments.Extensions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
-namespace Reflectamundo
+namespace BufTools.ObjectCreation.FromXmlComments
 {
+    /// <summary>
+    /// A class that instantiates an object and uses the objects XML comment example values to initializes it
+    /// </summary>
     public class ObjectMother
     {
         private readonly IServiceProvider _provider;
+        private readonly IList<Type> _ignoreAttributes = new List<Type>();
 
-        public ObjectMother(IServiceProvider provider)
+        /// <summary>
+        /// Initializes an object instance with an optional service provider
+        /// </summary>
+        /// <param name="provider">A service provider to create an object.</param>
+        /// <remarks>If the provider fails to create an object, then Activator will be used instead.</remarks>
+        /// <remarks>Using Activator means the object being constructed must have an public constructor that takes no arguments.</remarks>
+        public ObjectMother(IServiceProvider provider = null)
         {
-            _provider = provider ?? throw new ArgumentNullException(nameof(provider));
+            _provider = provider;
         }
 
+        /// <summary>
+        /// Allows your to specify any Attributes where the property should be ignored. For ex, JsonIgnoreAttribute
+        /// </summary>
+        /// <typeparam name="TAttribute"></typeparam>
+        /// <returns>An <see cref="ObjectMother"/> instance for chaining</returns>
+        public ObjectMother IgnorePropertiesWithAttribute<TAttribute>() where TAttribute : Attribute
+        {
+            _ignoreAttributes.Add(typeof(TAttribute));
+            return this;
+        }
+
+        /// <summary>
+        /// Instantiates an object of type T and initializes the properties to the example value found in the XML comments
+        /// </summary>
+        /// <typeparam name="T">The type of object to create</typeparam>
+        /// <returns>An instance of the object initialized with example values</returns>
         public T Birth<T>()
         {
             return (T)Birth(typeof(T));
         }
 
+        /// <summary>
+        /// Instantiates an object and initializes the properties to the example value found in the XML comments
+        /// </summary>
+        /// <param name="type">The type of object to create</param>
+        /// <returns>An instance of the object initialized with example values</returns>
+        /// <exception cref="CannotInstantiateType">Thrown when the object cannot be instantiated</exception>
+        /// <exception cref="ExampleNotFound">When an XML example value was not provided on a property</exception>
+        /// <exception cref="ValueNotFound">Thrown when a value is not found on in an example</exception>
+        /// <exception cref="XmlDocumentationFileNotFound">Thrown when the XML documentation file on disk was not found/does not exist.</exception>
         public object Birth(Type type)
         {
-            //if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IEnumerable<>))
-            //{
-            //    return GetValue("", type) ?? throw new ValueNotFoundException();
-            //}
-
-            var instance = _provider.GetService(type);
+            var instance = _provider?.GetService(type);
             if (instance == null)
-                throw new TypeNotRegisteredException($"Could not create an instance of {type}");
+                instance = Activator.CreateInstance(type);
+
+            if (instance == null)
+                throw new CannotInstantiateType($"Could not create an instance of {type}");
 
             var xmlDocs = type.Assembly.LoadXmlDocumentation();
             if (xmlDocs == null)
-                throw new Exception($"Could not load {type.Assembly.GetName().Name}.xml");
+                throw new XmlDocumentationFileNotFound($"Could not load {type.Assembly.GetName().Name}.xml");
 
             foreach (var property in type.GetProperties())
             {
-                //if (property.GetCustomAttributes(typeof(JsonIgnoreAttribute), true).Any())
-                //    continue;
+                if (_ignoreAttributes.Intersect(property.GetCustomAttributes().Select(a => a.GetType())).Any())
+                    continue;
 
                 var doc = xmlDocs.GetDocumentation(property);
                 if (doc == null)
-                    throw new XmlDocumentationFileNotFoundException($"No XML documentation was found for {type.Name}.{property.Name}");
+                    throw new XmlDocumentationFileNotFound($"No XML documentation was found for {type.Name}.{property.Name}");
 
                 if (doc.Example == null && !(property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(IEnumerable<>)))
-                    throw new ExampleNotFoundException($"An example value is needed for property {type.Name}.{property.Name} (even if it's empty)");
+                    throw new ExampleNotFound($"An example value is needed for property {type.Name}.{property.Name} (even if it's empty)");
 
                 var val = GetValue(doc.Example, property.PropertyType);
                 property.SetValue(instance, val);

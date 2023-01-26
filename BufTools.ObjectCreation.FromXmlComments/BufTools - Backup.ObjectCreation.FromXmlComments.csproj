@@ -18,10 +18,6 @@ The same &lt;example&gt; values are used by Swagger to populate object examples 
     <PackageIcon>icon.png</PackageIcon>
     <Authors>Jeremy Shull</Authors>
     <Version>1.1.0</Version>
-    <PackageReleaseNotes>- Made IServiceProvider optional.  Activator used in it's place.
-- Added XML documentation to code
-- Fixed misnamed namespaces
-- Renamed exceptions</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

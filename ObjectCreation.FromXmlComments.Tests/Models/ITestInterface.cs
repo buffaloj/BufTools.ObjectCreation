@@ -1,4 +1,4 @@
-﻿namespace Reflectamundo.Tests.Models
+﻿namespace ObjectCreation.FromXmlComments.Tests.Models
 {
     internal interface ITestInterface
     {

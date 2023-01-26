@@ -1,5 +1,5 @@
 ﻿
-namespace Reflectamundo.Models
+namespace BufTools.ObjectCreation.FromXmlComments.Models
 {
     public class ParamDoc
     {

@@ -1,8 +1,8 @@
 ﻿using BufTools.ObjectCreation.FromXmlComments.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Reflectamundo.Tests.Models;
+using ObjectCreation.FromXmlComments.Tests.Models;
 
-namespace Reflectamundo.Tests
+namespace ObjectCreation.FromXmlComments.Tests
 {
     [TestClass]
     public class AssemblyExtensionsTests

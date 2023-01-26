@@ -1,5 +1,5 @@
 ﻿using BufTools.ObjectCreation.FromXmlComments.Resources;
-using Reflectamundo.Models;
+using BufTools.ObjectCreation.FromXmlComments.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;

@@ -1,4 +1,4 @@
-﻿namespace Reflectamundo.Tests.BirthModels
+﻿namespace ObjectCreation.FromXmlComments.Tests.BirthModels
 {
     public class BasicPropertiesModel
     {
