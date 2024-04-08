@@ -18,7 +18,8 @@ namespace BufTools.ObjectCreation.FromXmlComments.Extensions
             string xmlFilePath = Path.Combine(xmlDirectoryPath, assembly.GetName().Name + ".xml");
 
             if (!File.Exists(xmlFilePath))
-                throw new FileNotFoundException(string.Format(ProjectResources.XmlFileNotFound, xmlFilePath));
+                return new Dictionary<string, MemberDoc>();
+                //throw new FileNotFoundException(string.Format(ProjectResources.XmlFileNotFound, xmlFilePath));
 
             return LoadXmlDocumentation(File.ReadAllText(xmlFilePath));
         }

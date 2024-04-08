@@ -68,7 +68,8 @@ namespace BufTools.ObjectCreation.FromXmlComments
 
             var xmlDocs = type.Assembly.LoadXmlDocumentation();
             if (xmlDocs == null)
-                throw new XmlDocumentationFileNotFound($"Could not load {type.Assembly.GetName().Name}.xml");
+                return instance;
+                //throw new XmlDocumentationFileNotFound($"Could not load {type.Assembly.GetName().Name}.xml");
 
             foreach (var property in type.GetProperties())
             {
@@ -77,7 +78,8 @@ namespace BufTools.ObjectCreation.FromXmlComments
 
                 var doc = xmlDocs.GetDocumentation(property);
                 if (doc == null)
-                    throw new XmlDocumentationFileNotFound($"No XML documentation was found for {type.Name}.{property.Name}");
+                    //throw new XmlDocumentationFileNotFound($"No XML documentation was found for {type.Name}.{property.Name}");
+                    continue;
 
                 if (doc.Example == null && !(property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(IEnumerable<>)))
                     throw new ExampleNotFound($"An example value is needed for property {type.Name}.{property.Name} (even if it's empty)");
