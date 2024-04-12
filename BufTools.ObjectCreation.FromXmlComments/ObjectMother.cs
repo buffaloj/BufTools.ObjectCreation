@@ -76,13 +76,16 @@ namespace BufTools.ObjectCreation.FromXmlComments
                 if (_ignoreAttributes.Intersect(property.GetCustomAttributes().Select(a => a.GetType())).Any())
                     continue;
 
+                // TODO: this came up due to DateTimeOffset - there is no XML comments for the DLL it lives in
                 var doc = xmlDocs.GetDocumentation(property);
                 if (doc == null)
                     //throw new XmlDocumentationFileNotFound($"No XML documentation was found for {type.Name}.{property.Name}");
                     continue;
 
+                // TODO: this came up due to NAV properties - skip if it's a virtual object?
                 if (doc.Example == null && !(property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(IEnumerable<>)))
-                    throw new ExampleNotFound($"An example value is needed for property {type.Name}.{property.Name} (even if it's empty)");
+                    //throw new ExampleNotFound($"An example value is needed for property {type.Name}.{property.Name} (even if it's empty)");
+                    continue;
 
                 var val = GetValue(doc.Example, property.PropertyType);
                 property.SetValue(instance, val);
