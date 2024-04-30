@@ -1,5 +1,5 @@
 ﻿using BufTools.ObjectCreation.FromXmlComments.Exceptions;
-using BufTools.ObjectCreation.FromXmlComments.Extensions;
+using BufTools.Extensions.XmlComments;
 using System;
 using System.Collections;
 using System.Collections.Generic;
