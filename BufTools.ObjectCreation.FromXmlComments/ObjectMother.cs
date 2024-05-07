@@ -52,24 +52,30 @@ namespace BufTools.ObjectCreation.FromXmlComments
         /// Instantiates an object and initializes the properties to the example value found in the XML comments
         /// </summary>
         /// <param name="type">The type of object to create</param>
+        /// <param name="reportError">Delegate usd to record errors</param>
         /// <returns>An instance of the object initialized with example values</returns>
         /// <exception cref="CannotInstantiateType">Thrown when the object cannot be instantiated</exception>
         /// <exception cref="ExampleNotFound">When an XML example value was not provided on a property</exception>
         /// <exception cref="ValueNotFound">Thrown when a value is not found on in an example</exception>
         /// <exception cref="XmlDocumentationFileNotFound">Thrown when the XML documentation file on disk was not found/does not exist.</exception>
-        public object Birth(Type type)
+        public object Birth(Type type, Action<Type, string> reportError = null)
         {
             var instance = _provider?.GetService(type);
             if (instance == null)
                 instance = Activator.CreateInstance(type);
 
             if (instance == null)
-                throw new CannotInstantiateType($"Could not create an instance of {type}");
+            {
+                reportError?.Invoke(type, $"Could not create an instance of {type}");
+                return null;
+            }
 
             var xmlDocs = type.Assembly.LoadXmlDocumentation();
             if (xmlDocs == null)
-                return instance;
-                //throw new XmlDocumentationFileNotFound($"Could not load {type.Assembly.GetName().Name}.xml");
+            {
+                reportError?.Invoke(type, $"Could not load {type.Assembly.GetName().Name}.xml");
+                return null;
+            }
 
             foreach (var property in type.GetProperties())
             {
@@ -79,13 +85,17 @@ namespace BufTools.ObjectCreation.FromXmlComments
                 // TODO: this came up due to DateTimeOffset - there is no XML comments for the DLL it lives in
                 var doc = xmlDocs.GetDocumentation(property);
                 if (doc == null)
-                    //throw new XmlDocumentationFileNotFound($"No XML documentation was found for {type.Name}.{property.Name}");
+                {
+                    reportError?.Invoke(type, $"No XML documentation was found for {type.Name}.{property.Name}");
                     continue;
+                }
 
                 // TODO: this came up due to NAV properties - skip if it's a virtual object?
                 if (doc.Example == null && !(property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(IEnumerable<>)))
-                    //throw new ExampleNotFound($"An example value is needed for property {type.Name}.{property.Name} (even if it's empty)");
+                {
+                    reportError?.Invoke(type, $"An example value is needed for property {type.Name}.{property.Name} (even if it's empty)");
                     continue;
+                }
 
                 var val = GetValue(doc.Example, property.PropertyType);
                 property.SetValue(instance, val);
@@ -139,7 +149,7 @@ namespace BufTools.ObjectCreation.FromXmlComments
             if (type == typeof(DateTime?))
                 return string.IsNullOrEmpty(value) ? default(DateTime?) : DateTime.Parse(value);
             if (type == typeof(DateTime))
-                return DateTime.Parse(value);
+                return string.IsNullOrEmpty(value) ? DateTime.MinValue : DateTime.Parse(value);
 
             if (type == typeof(bool?))
                 return string.IsNullOrEmpty(value) ? default(long?) : long.Parse(value);
