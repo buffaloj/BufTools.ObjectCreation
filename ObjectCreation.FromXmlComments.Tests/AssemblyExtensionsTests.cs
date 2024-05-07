@@ -1,4 +1,4 @@
-﻿using BufTools.ObjectCreation.FromXmlComments.Extensions;
+﻿using BufTools.Extensions.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ObjectCreation.FromXmlComments.Tests.Models;
 

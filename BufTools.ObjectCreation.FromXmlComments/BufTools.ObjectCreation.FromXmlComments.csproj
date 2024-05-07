@@ -9,7 +9,7 @@
     <Description>Provides an ObjectMother class will create an instance of an object and initialize it from the example values in your XML comments.
 
 The same &lt;example&gt; values are used by Swagger to populate object examples (after providing the XML files to Swagger).</Description>
-    <Copyright>Copyright (c) Jeremy Shull, 2023</Copyright>
+    <Copyright>Copyright (c) Jeremy Shull, 2024</Copyright>
     <PackageProjectUrl>https://github.com/buffaloj/BufTools.ObjectCreation</PackageProjectUrl>
     <RepositoryUrl>https://github.com/buffaloj/BufTools.ObjectCreation</RepositoryUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -17,11 +17,13 @@ The same &lt;example&gt; values are used by Swagger to populate object examples 
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageIcon>icon.png</PackageIcon>
     <Authors>Jeremy Shull</Authors>
-    <Version>1.1.0</Version>
+    <Version>2.0.0</Version>
     <PackageReleaseNotes>- Made IServiceProvider optional.  Activator used in it's place.
 - Added XML documentation to code
 - Fixed misnamed namespaces
 - Renamed exceptions</PackageReleaseNotes>
+    <AssemblyVersion>2.0.0</AssemblyVersion>
+    <FileVersion>2.0.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -40,8 +42,8 @@ The same &lt;example&gt; values are used by Swagger to populate object examples 
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\BufTools.Extensions\BufTools.Extensions.Reflection\BufTools.Extensions.Reflection.csproj" />
-    <ProjectReference Include="..\..\BufTools.Extensions\BufTools.Extensions.XmlComments\BufTools.Extensions.XmlComments.csproj" />
+    <PackageReference Include="BufTools.Extensions.Reflection" Version="2.0.0" />
+    <PackageReference Include="BufTools.Extensions.XmlComments" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>

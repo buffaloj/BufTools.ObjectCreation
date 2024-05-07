@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Reflection;
 using ObjectCreation.FromXmlComments.Tests.ReflectionModels;
-using BufTools.ObjectCreation.FromXmlComments.Extensions;
+using BufTools.Extensions.XmlComments;
 
 namespace ObjectCreation.FromXmlComments.Tests
 {
