@@ -52,7 +52,7 @@ namespace BufTools.ObjectCreation.FromXmlComments
         /// Instantiates an object and initializes the properties to the example value found in the XML comments
         /// </summary>
         /// <param name="type">The type of object to create</param>
-        /// <param name="reportError">Delegate usd to record errors</param>
+        /// <param name="reportError">Delegate used to record errors</param>
         /// <returns>An instance of the object initialized with example values</returns>
         /// <exception cref="CannotInstantiateType">Thrown when the object cannot be instantiated</exception>
         /// <exception cref="ExampleNotFound">When an XML example value was not provided on a property</exception>
@@ -93,12 +93,35 @@ namespace BufTools.ObjectCreation.FromXmlComments
                 // TODO: this came up due to NAV properties - skip if it's a virtual object?
                 if (doc.Example == null && !(property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(IEnumerable<>)))
                 {
-                    reportError?.Invoke(type, $"An example value is needed for property {type.Name}.{property.Name} (even if it's empty)");
+                    reportError?.Invoke(type, $"An example value is needed for {type.Name}.{property.Name} (even if it's empty)");
                     continue;
                 }
 
-                var val = GetValue(doc.Example, property.PropertyType);
-                property.SetValue(instance, val);
+                object val = null;
+                try
+                {
+                    val = GetValue(doc.Example, property.PropertyType);
+                }
+                catch (FormatException ex)
+                {
+                    reportError?.Invoke(type, $"'{doc.Example}' is not a valid {property.PropertyType.Name} for {type.Name}.{property.Name}");
+                    continue;
+                }
+                catch (Exception ex) 
+                {
+                    reportError?.Invoke(type, $"An exception occurred while trying to get '{doc.Example}' for {type.Name}.{property.Name}:\n{ex.Message}");
+                    continue;
+                }
+
+                try
+                {
+                    property.SetValue(instance, val);
+                }
+                catch (Exception ex)
+                {
+                    reportError?.Invoke(type, $"An exception occurred while trying to apply '{doc.Example}' to {type.Name}.{property.Name}:\n{ex.Message}");
+                    continue;
+                }
             }
             return instance;
         }
@@ -109,7 +132,7 @@ namespace BufTools.ObjectCreation.FromXmlComments
             {
                 type = type.GetGenericArguments()[0];
 
-                var innerObject = GetValue(value, type);// Birth(type);
+                var innerObject = GetValue(value, type);
 
                 var listType = typeof(List<>);
                 var constructedListType = listType.MakeGenericType(type);
@@ -157,7 +180,7 @@ namespace BufTools.ObjectCreation.FromXmlComments
                 return bool.Parse(value);
 
             if (type.IsEnum)
-                return Convert.ChangeType(value, Enum.GetUnderlyingType(type));
+                return Enum.Parse(type, value);
 
             return Birth(type);
         }
