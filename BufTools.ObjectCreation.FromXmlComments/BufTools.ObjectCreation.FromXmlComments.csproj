@@ -17,13 +17,11 @@ The same &lt;example&gt; values are used by Swagger to populate object examples 
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageIcon>icon.png</PackageIcon>
     <Authors>Jeremy Shull</Authors>
-    <Version>2.0.0</Version>
-    <PackageReleaseNotes>- Made IServiceProvider optional.  Activator used in it's place.
-- Added XML documentation to code
-- Fixed misnamed namespaces
-- Renamed exceptions</PackageReleaseNotes>
-    <AssemblyVersion>2.0.0</AssemblyVersion>
-    <FileVersion>2.0.0</FileVersion>
+    <Version>2.0.1</Version>
+    <PackageReleaseNotes>- better error handling and messages</PackageReleaseNotes>
+    <AssemblyVersion>2.0.1</AssemblyVersion>
+    <FileVersion>2.0.1</FileVersion>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
